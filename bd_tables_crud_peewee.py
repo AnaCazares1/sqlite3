@@ -66,17 +66,17 @@ class CRUDPanel:
 		
 		if model == 'doctores':
 			if ids:
-				return [str(doc) for doc in Doctores.select().where(Doctores.id_doctor << ids)]
+				return [str(doc) for doc in Doctores.select().where(*ids)]
 			return [str(doc) for doc in Doctores.select()]
 
 		if model == 'pacientes':
 			if ids:
-				return [str(pcte) for pcte in Pacientes.select().where(Pacientes.id_paciente << ids)]
+				return [str(pcte) for pcte in Pacientes.select().where(*ids)]
 			return [str(pcte) for pcte in Pacientes.select()]
 
 		if model == 'consultas':
 			if ids:
-				return [str(con) for con in Consultas.select().where(Consultas.id_consulta << ids)]
+				return [str(con) for con in Consultas.select().where(*ids)]
 			return [str(con) for con in Consultas.select()]
 
 		else:
@@ -109,10 +109,13 @@ class CRUDPanel:
 
 #-------------------- SELECT A TABLA DOCTORES CON id_doctor COMO CONDICIONAL ------------------------#
 print(Doctores.select().where(Doctores.id_doctor == 30).get())
+print(CRUDPanel.select_row('Doctores', Doctores.id_doctor == 30))
 #------------------- SELECT A TABLA PACIENTES CON id_paciente COMO CONDICIONAL ----------------------#
 print(Pacientes.select().where(Pacientes.id_paciente == 30).get())
+print(CRUDPanel.select_row('Pacientes', Pacientes.id_paciente == 30))
 #------------------- SELECT A TABLA PACIENTES CON id_consulta COMO CONDICIONAL ----------------------#
 print(Consultas.select().where(Consultas.id_consulta == 20).get())
+print(CRUDPanel.select_row('Consultas', Consultas.id_consulta == 20))
 
 #--------------------- UPDATE A UN DOCTOR CON id_doctor COMO CONDICIONAL ----------------------------#
 #up_doc = {'especialidad': 'Oncología'}
